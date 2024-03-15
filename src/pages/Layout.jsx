@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import CardMenu from "../components/CardMenu";
 import MenuNavegacaoMobile from "../components/MenuNavegacaoMobile";
 
@@ -23,7 +24,9 @@ export default function Layout(){
                     </div>
                 </header>
                 <main>
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{/* Your content */'conteudo'}</div>
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        <Outlet />
+                    </div>
                 </main>
                 <footer className="rodape-principal">
 
