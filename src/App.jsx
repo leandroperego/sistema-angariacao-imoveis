@@ -1,11 +1,11 @@
-import './App.css'
-import Login from './pages/Login';
+import './App.css';
+import Layout from './pages/Layout';
 
 function App() {
 
   return (
     <>
-      <Login />
+      <Layout />
     </>
   )
 }
