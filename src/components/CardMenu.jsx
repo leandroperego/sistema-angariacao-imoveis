@@ -22,7 +22,7 @@ import {
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-export default function CardMenu( { actionXMarkIcon } ) {
+export default function CardMenu( { closeCard } ) {
 
     return (
         <Card
@@ -31,7 +31,7 @@ export default function CardMenu( { actionXMarkIcon } ) {
             className="h-[calc(100vh-2rem)] w-full p-4"
         >
             <div className="mb-2 flex items-center justify-between lg:justify-normal lg:gap-4 p-4">
-                <Link to={"home"}>
+                <Link to={"home"} onClick={closeCard}>
                     <img
                         src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                         alt="logo"
@@ -41,12 +41,12 @@ export default function CardMenu( { actionXMarkIcon } ) {
                 <Typography variant="h5" className="text-blue-gray lg:text-white">
                     CapSystem
                 </Typography>
-                <IconButton variant="text" size="sm" className="lg:hidden" onClick={actionXMarkIcon}>
+                <IconButton variant="text" size="sm" className="lg:hidden" onClick={closeCard}>
                     <XMarkIcon className="h-6 w-6 stroke-2" />
                 </IconButton>
             </div>
             <List className="lg:*:text-white">
-                <Link to={"cadastrar-contato"}>
+                <Link to={"cadastrar-contato"} onClick={closeCard}>
                     <ListItem>
                         <ListItemPrefix>
                             <PlusCircleIcon className="h-5 w-5" />
@@ -55,7 +55,7 @@ export default function CardMenu( { actionXMarkIcon } ) {
                     </ListItem>
                 </Link>
 
-                <Link to={"listar-contatos"}>
+                <Link to={"listar-contatos"} onClick={closeCard}>
                 <ListItem>
                     <ListItemPrefix>
                         <PhoneArrowUpRightIcon className="h-5 w-5" />

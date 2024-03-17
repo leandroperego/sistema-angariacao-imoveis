@@ -27,7 +27,7 @@ export default function MenuNavegacaoMobile() {
         )}
       </IconButton>
       <Drawer open={isDrawerOpen} onClose={closeDrawer}>
-        <CardMenu actionXMarkIcon={closeDrawer}/>
+        <CardMenu closeCard={closeDrawer}/>
       </Drawer>
     </>
   );
