@@ -7,6 +7,9 @@ import {
     Option,
     Button
 } from "@material-tailwind/react";
+import CardInput from './formsComponents/CardInput';
+import RowForm from './formsComponents/RowForm';
+import ContainerForm from './formsComponents/ContainerForm';
 
 export default function FormCadastroContato() {
     const { Formik } = formik;
@@ -58,10 +61,12 @@ export default function FormCadastroContato() {
                 ({ handleSubmit, handleChange, resetForm, values, setValues, touched, errors }) => (
                     <form onSubmit={handleSubmit}>
                         {/* Dados do Imóvel */}
-                        <section className="flex flex-col gap-6 mb-10">
-                            <h3 className="text-blue-gray-700">Dados do Imóvel</h3>
-                            <div className="flex flex-col gap-6 sm:flex-row">
-                                <section className='w-full'>
+                        <ContainerForm title='Dados do Imóvel'>
+                            <RowForm>
+                                <CardInput
+                                    isInvalided={touched.comercializacao && errors.comercializacao}
+                                    error={errors.comercialacao}
+                                >
                                     <Select
                                         label="Comercialização"
                                         name="comercializacao"
@@ -71,13 +76,12 @@ export default function FormCadastroContato() {
                                         <Option value="Venda">Venda</Option>
                                         <Option value="Aluguel">Aluguel</Option>
                                     </Select>
-                                    {
-                                        touched.comercializacao && errors.comercializacao &&
-                                        <p className="text-red-500">{errors.comercializacao}</p>
-                                    }
-                                </section>
+                                </CardInput>
 
-                                <section className='w-full'>
+                                <CardInput
+                                    isInvalided={touched.tipo && errors.tipo}
+                                    error={errors.tipo}
+                                >
                                     <Select
                                         label="Tipo de Imóvel"
                                         name="tipo"
@@ -91,23 +95,25 @@ export default function FormCadastroContato() {
                                             ))
                                         }
                                     </Select>
-                                    {
-                                        touched.tipo && errors.tipo &&
-                                        <p className="ml-1 mt-1 text-sm text-red-500">{errors.tipo}</p>
-                                    }
-                                </section>
-                            </div>
+                                </CardInput>
+                            </RowForm>
 
-                            <Input
-                                label="Endereço"
-                                name="endereco"
-                                value={values.endereco}
-                                onChange={handleChange}
-                            />
+                            <RowForm>
+                                <CardInput>
+                                    <Input
+                                        label="Endereço"
+                                        name="endereco"
+                                        value={values.endereco}
+                                        onChange={handleChange}
+                                    />
+                                </CardInput>
+                            </RowForm>
 
-                            <div className="flex flex-col gap-6 md:flex-row">
-
-                                <section className='w-full'>
+                            <RowForm>
+                                <CardInput
+                                    isInvalided={touched.cidade && errors.cidade}
+                                    error={errors.cidade}
+                                >
                                     <Input
                                         label="Cidade"
                                         name="cidade"
@@ -115,71 +121,68 @@ export default function FormCadastroContato() {
                                         onChange={handleChange}
                                         error={touched.cidade && errors.cidade}
                                     />
-                                    {
-                                        touched.cidade && errors.cidade &&
-                                        <p className="ml-1 mt-1 text-sm text-red-500">{errors.cidade}</p>
-                                    }
-                                </section>
+                                </CardInput>
 
-                                <Input
-                                    label="Bairro"
-                                    name="bairro"
-                                    value={values.bairro}
-                                    onChange={handleChange}
-                                />
+                                <CardInput>
+                                    <Input
+                                        label="Bairro"
+                                        name="bairro"
+                                        value={values.bairro}
+                                        onChange={handleChange}
+                                    />
+                                </CardInput>
 
-                                <Input
-                                    label="Ponto de Referência"
-                                    name="pontoRef"
-                                    value={values.pontoRef}
-                                    onChange={handleChange}
-                                />
-
-                            </div>
-                        </section>
-
+                                <CardInput>
+                                    <Input
+                                        label="Ponto de Referência"
+                                        name="pontoRef"
+                                        value={values.pontoRef}
+                                        onChange={handleChange}
+                                    />
+                                </CardInput>
+                            </RowForm>
+                        </ContainerForm>
 
                         {/* Dados de Contato */}
-                        <section className="flex flex-col gap-6 ">
-                            <h3 className="text-blue-gray-700">Dados de Contato</h3>
+                        <ContainerForm title='Dados de Contato'>
+                            <RowForm>
 
-                            <div className="flex flex-col gap-6 md:flex-row">
+                                <CardInput>
+                                    <Input
+                                        label="Nome"
+                                        name="nome"
+                                        value={values.nome}
+                                        onChange={handleChange}
+                                    />
+                                </CardInput>
 
-                                <Input
-                                    label="Nome"
-                                    name="nome"
-                                    value={values.nome}
-                                    onChange={handleChange}
-                                />
+                                <CardInput
+                                    isInvalided={touched.telefone1 && errors.telefone1}
+                                    error={errors.telefone1}
+                                >
+                                    <Input
+                                        label="Telefone 1"
+                                        name="telefone1"
+                                        value={values.telefone1}
+                                        onChange={handleChange}
+                                        error={touched.telefone1 && errors.telefone1}
+                                    />
+                                </CardInput>
 
-                                <div className="flex flex-col gap-6 sm:flex-row">
-                                    <section className='w-full'>
-                                        <Input
-                                            label="Telefone 1"
-                                            name="telefone1"
-                                            value={values.telefone1}
-                                            onChange={handleChange}
-                                            error={touched.telefone1 && errors.telefone1}
-                                        />
-                                        {
-                                            touched.telefone1 && errors.telefone1 &&
-                                            <p className="ml-1 mt-1 text-sm text-red-500">{errors.telefone1}</p>
-                                        }
-                                    </section>
-
+                                <CardInput>
                                     <Input
                                         label="Telefone 2"
                                         name="telefone2"
                                         value={values.telefone2}
                                         onChange={handleChange}
                                     />
-                                </div>
+                                </CardInput>
 
-                            </div>
-                        </section>
+                            </RowForm>
+                        </ContainerForm>
                         <Button
                             color="blue"
-                            className="min-w-full sm:min-w-min mt-6"
+                            className="min-w-min w-full sm:w-2/5 md:w-1/5 lg:w-auto"
                             type='submit'
                         >
                             Cadastrar
