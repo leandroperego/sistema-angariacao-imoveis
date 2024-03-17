@@ -14,7 +14,7 @@ export default function Layout(){
                 />
                 <MenuNavegacaoMobile />
             </aside>
-            <aside className="hidden lg:flex flex-col w-1/3 h-screen absolute top-0 left-0 bg-blue-gray-800 2xl:w-1/4">
+            <aside className="hidden lg:flex flex-col w-1/3 h-screen fixed top-0 left-0 bg-blue-gray-800 2xl:w-1/4">
                 <CardMenu />
             </aside>
             <section className="lg:absolute top-0 left-1/3 lg:w-2/3 2xl:w-3/4 2xl:left-1/4">
