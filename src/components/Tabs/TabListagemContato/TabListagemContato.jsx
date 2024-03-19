@@ -9,28 +9,23 @@ import TabBodyIdentificacao from "../TabListagemContato/TabBodyIdentificacao";
 import TabBodyContato from "./TabBodyContato";
 import TabBodyAnotacoes from "./TabBodyAnotacoes";
 
-import { useContext } from "react";
-import { ContatoContext } from '../../Cards/CardListagem';
+export default function TabListagemContato({ imovel }) {
 
-export default function TabListagemContato() {
-
-  const contato = useContext(ContatoContext);
-  
   const tabs = [
     {
       label: "Identificação",
       value: "id",
-      desc: <TabBodyIdentificacao />,
+      desc: <TabBodyIdentificacao imovel={imovel} />,
     },
     {
       label: "Contato",
       value: "contato",
-      desc: <TabBodyContato />,
+      desc: <TabBodyContato imovel={imovel}/>,
     },
     {
       label: "Anotações",
       value: "anotacoes",
-      desc: <TabBodyAnotacoes />,
+      desc: <TabBodyAnotacoes imovel={imovel}/>,
     },
   ];
 
@@ -43,23 +38,23 @@ export default function TabListagemContato() {
         }}
       >
         <header className="pr-3 mb-2 hidden md:block">
-          <h3 className="text-2xl font-bold text-right">{contato.comercializacao}</h3>
+          <h3 className={`text-2xl font-bold text-right ${imovel.comercializacao === "Venda" ? "text-red-600" : "text-green-600"}`}>{imovel.comercializacao}</h3>
         </header>
         <div className="w-full flex justify-evenly md:justify-start md:gap-5 ">
-        {tabs.map(({ label, value }) => (
-          <Tab key={value} value={value} className="md:w-auto">
-            {label}
-          </Tab>
-        ))}
+          {tabs.map(({ label, value }) => (
+            <Tab key={value} value={value} className="md:w-auto">
+              {label}
+            </Tab>
+          ))}
         </div>
       </TabsHeader>
 
       <TabsBody>
-        {tabs.map(({ value, desc }) => (
-          <TabPanel key={value} value={value}>
-            {desc}
-          </TabPanel>
-        ))}
+          {tabs.map(({ value, desc }) => (
+            <TabPanel key={value} value={value}>
+              {desc}
+            </TabPanel>
+          ))}
       </TabsBody>
     </Tabs>
   );

@@ -3,9 +3,6 @@ import ListBody from '../components/List/ListBody';
 import ListItem from '../components/List/ListItem';
 import MainPages from '../components/MainPages';
 import CardListagem from '../components/Cards/CardListagem';
-// import { createContext } from 'react';
-
-// export const ContextDataContatos = createContext();
 
 export default function ListagemContatos() {
 

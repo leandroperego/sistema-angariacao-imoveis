@@ -1,15 +1,11 @@
-import { Textarea, Button, IconButton } from "@material-tailwind/react";
+import { Textarea, Button } from "@material-tailwind/react";
 
 import { useState } from "react";
-import { useContext } from "react";
-import { ContatoContext } from '../../Cards/CardListagem';
 
-export default function TabBodyAnotacoes() {
-
-  const contato = useContext(ContatoContext);
+export default function TabBodyAnotacoes( { imovel } ) {
 
   const [isModified, setIsModified] = useState(false);
-  const [contatoAnotacoes, setContatoAnotacoes] = useState(contato.anotacoes);
+  const [contatoAnotacoes, setContatoAnotacoes] = useState(imovel.anotacoes);
 
   const handleChange = (e) => {
     setIsModified(true);
@@ -17,7 +13,7 @@ export default function TabBodyAnotacoes() {
   }
 
   const handleCancel = () => {
-    setContatoAnotacoes(contato.anotacoes);
+    setContatoAnotacoes(imovel.anotacoes);
     setIsModified(!isModified);
   }
 

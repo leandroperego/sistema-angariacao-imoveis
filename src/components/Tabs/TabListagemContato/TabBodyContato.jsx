@@ -1,15 +1,10 @@
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { useState } from "react";
 
-import { useContext } from "react";
-import { ContatoContext } from '../../Cards/CardListagem';
-
-export default function TabBodyContato() {
-
-    const contato = useContext(ContatoContext);
+export default function TabBodyContato( { imovel } ) {
 
     const [isModified, setIsModified] = useState(false);
-    const [contatoNome, setContatoNome] = useState(contato.nome);
+    const [contatoNome, setContatoNome] = useState(imovel.nome);
 
     const handleChange = (e) => {
         setIsModified(true);
@@ -26,7 +21,7 @@ export default function TabBodyContato() {
     }
 
     const handleCancelar = () => {
-        setContatoNome(contato.nome);
+        setContatoNome(imovel.nome);
         setIsModified(!isModified);
     }
 
@@ -83,10 +78,10 @@ export default function TabBodyContato() {
                 </div>
             </div>
             <Typography>
-                Telefone 1: {contato.telefone1}
+                Telefone 1: {imovel.telefone1}
             </Typography>
             <Typography>
-                Telefone 2: {contato.telefone2}
+                Telefone 2: {imovel.telefone2}
             </Typography>
         </section>
     )
