@@ -7,6 +7,7 @@ import {
     Option,
     Button
 } from "@material-tailwind/react";
+// import { PhotoIcon } from '@heroicons/react/24/solid'
 import CardInput from './formsComponents/CardInput';
 import RowForm from './formsComponents/RowForm';
 import ContainerForm from './formsComponents/ContainerForm';
@@ -51,7 +52,7 @@ export default function FormCadastroContato() {
                 endereco: '',
                 bairro: '',
                 pontoRef: '',
-                // img: 'https://triunfo.pe.gov.br/pm_tr430/wp-content/uploads/2018/03/sem-foto.jpg',
+                img: 'https://triunfo.pe.gov.br/pm_tr430/wp-content/uploads/2018/03/sem-foto.jpg',
                 nome: '',
                 telefone1: '',
                 telefone2: '',
@@ -137,6 +138,44 @@ export default function FormCadastroContato() {
                                         label="Ponto de Referência"
                                         name="pontoRef"
                                         value={values.pontoRef}
+                                        onChange={handleChange}
+                                    />
+                                </CardInput>
+                            </RowForm>
+                            {/* <RowForm>
+                                <CardInput>
+                                    <div className="col-span-full">
+                                        <label htmlFor="cover-photo" className="block pl-2 text-sm font-medium leading-6 text-blue-gray-500">
+                                            Foto do Imóvel
+                                        </label>
+                                        <label
+                                            htmlFor="file-upload"
+                                            className="relative cursor-pointer"
+                                        >
+                                            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+
+                                                <div className="text-center">
+                                                    <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
+                                                    <div className="mt-4 flex text-sm leading-6 text-gray-600">
+
+                                                        <span className='text-blue-800'>Carregue a foto</span>
+                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                        <p className="pl-1">ou arraste e solte aqui</p>
+                                                    </div>
+                                                    <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                                                </div>
+
+                                            </div>
+                                        </label>
+                                    </div>
+                                </CardInput>
+                            </RowForm> */}
+                            <RowForm>
+                                <CardInput>
+                                    <Input
+                                        label="Imagem do Imóvel"
+                                        name="img"
+                                        value={values.img}
                                         onChange={handleChange}
                                     />
                                 </CardInput>
