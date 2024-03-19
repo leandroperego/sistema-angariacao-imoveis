@@ -1,21 +1,27 @@
 import { Typography } from "@material-tailwind/react";
 
+import { useContext } from "react";
+import { ContatoContext } from '../../Cards/CardListagem';
+
 export default function TabBodyIdentificacao() {
+
+    const contato = useContext(ContatoContext);
+
     return (
         <section className="flex justify-between items-center">
             <div className="w-full h-full flex flex-col justify-around">
-                <Typography variant="h5" className="mb-2 text-blue-gray-600">
-                    APARTAMENTO
+                <Typography variant="h4" className="mb-2 text-black">
+                    {contato.tipo.toUpperCase()}
                 </Typography>
                 <Typography >
-                    Bairro: <span className="font-bold">Jardim das Americas</span>
+                    Bairro: <span className="font-bold">{contato.bairro}</span>
                 </Typography>
                 <Typography>
-                    Curitiba
+                    {contato.cidade}
                 </Typography>
             </div>
             <div className="w-[150px] h-[150px] hidden md:block">
-                <img src="https://ottohouse.com.br/wp-content/uploads/2019/11/trocar-de-imovel-no-fim-de-ano-e-uma-boa-ideia-26897.jpg" alt="foto do imóvel" className="object-contain w-full h-full" />
+                <img src={contato.img} alt="foto do imóvel" className="object-contain w-full h-full" />
             </div>
         </section>
     )
