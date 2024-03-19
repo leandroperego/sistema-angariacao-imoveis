@@ -12,7 +12,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index path='/home' element={<Home />} />
+            <Route index path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
             <Route path='/cadastrar-contato' element={<CadastrarContato />} />
             <Route path='/listar-contatos' element={<ListagemContatos />} />
           </Route > 

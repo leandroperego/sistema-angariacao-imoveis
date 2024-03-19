@@ -1,12 +1,27 @@
 import HeaderPages from '../components/HeaderPages';
+import ListBody from '../components/List/ListBody';
+import ListItem from '../components/List/ListItem';
+import MainPages from '../components/MainPages';
+import CardListagem from '../components/Cards/CardListagem';
 
 export default function ListagemContatos() {
+
     return (
         <>
-            <HeaderPages title="Listagem contatos"/>
-            <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 2xl:mx-28">
-                <p>Listagem</p>
-            </div>
+            <HeaderPages title="Listagem contatos" />
+            <MainPages>
+                <ListBody>
+                    <ListItem>
+                        <CardListagem />
+                    </ListItem>
+                    <ListItem>
+                        <CardListagem />
+                    </ListItem>
+                    <ListItem>
+                        <CardListagem />
+                    </ListItem>
+                </ListBody>
+            </MainPages>
         </>
     );
 }
