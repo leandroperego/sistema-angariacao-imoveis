@@ -16,6 +16,10 @@ export default function GroupRadioAction() {
 
     const [radioChecked, setRadioChecked] = useState(null);
 
+    const handleChange = (e) => {
+        setRadioChecked(e.target.id);
+    }
+
     const handleConfirmRadio = () => {
        alert(radioChecked);
     };
@@ -40,6 +44,7 @@ export default function GroupRadioAction() {
                                     className: "p-0",
                                 }}
                                 onClick={(e) => setRadioChecked(e.target.id)}
+                                onChange={handleChange}
                             />
                         </ListItemPrefix>
                         <Typography
@@ -67,6 +72,7 @@ export default function GroupRadioAction() {
                                     className: "p-0",
                                 }}
                                 onClick={(e) => setRadioChecked(e.target.id)}
+                                onChange={handleChange}
                             />
                         </ListItemPrefix>
                         <Typography

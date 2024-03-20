@@ -7,8 +7,12 @@ import {
 } from "@material-tailwind/react";
 import TabListagemContato from "../Tabs/TabListagemContato/TabListagemContato";
 import GroupRadioAction from "../Tabs/TabListagemContato/GroupRadioAction";
+import { useContext } from "react";
+import { ImovelContext } from "../../context/imovel-context";
 
-export default function CardListagem({ imovel }) {
+export default function CardListagem() {
+
+    const imovel = useContext(ImovelContext);
 
     return (
         <>
@@ -24,7 +28,7 @@ export default function CardListagem({ imovel }) {
                     />
                 </CardHeader>
                     <CardBody>
-                        <TabListagemContato imovel={imovel} />
+                        <TabListagemContato />
                     </CardBody>
                     <CardFooter className="pt-0 flex justify-center overflow-auto">
                         <GroupRadioAction />

@@ -7,10 +7,10 @@ import {
     Option,
     Button
 } from "@material-tailwind/react";
-// import { PhotoIcon } from '@heroicons/react/24/solid'
 import CardInput from './formsComponents/CardInput';
 import RowForm from './formsComponents/RowForm';
 import ContainerForm from './formsComponents/ContainerForm';
+import { addImovel } from '../../infra/db/imoveis';
 
 export default function FormCadastroContato() {
     const { Formik } = formik;
@@ -29,16 +29,22 @@ export default function FormCadastroContato() {
         cidade: yup.string().required('Campo obrigatório'),
         bairro: yup.string(),
         pontoRef: yup.string(),
-        // img: yup.string(),
+        img: yup.string(),
         nome: yup.string(),
         telefone1: yup.string().required('Campo obrigatório'),
         telefone2: yup.string(),
     });
 
-    const handleSubmit = (data, reset) => {
-        console.log(data);
-        // await addImovel(data);
-        reset();
+    const handleSubmit = async (data, reset) => {
+        const imovelId = await addImovel(data);
+
+        if (imovelId) {
+            alert('Imóvel registrado com sucesso!');
+            reset();
+        } else{
+            alert('Houve um erro ao registrar o imóvel. Tente novamente');
+        }
+
     };
 
     return (

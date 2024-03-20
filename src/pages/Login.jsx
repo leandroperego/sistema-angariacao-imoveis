@@ -1,4 +1,4 @@
-import { Input, Button } from "@material-tailwind/react";
+import { Input, Button, Spinner } from "@material-tailwind/react";
 import CardInput from "../components/Forms/formsComponents/CardInput";
 import ContainerForm from "../components/Forms/formsComponents/ContainerForm";
 import RowForm from "../components/Forms/formsComponents/RowForm";
@@ -77,7 +77,7 @@ export default function Login() {
                           }}
                           value={values.email}
                           onChange={handleChange}
-                          error={errors.email}
+                          error={touched.email && errors.email}
                         />
 
                       </CardInput>
@@ -99,7 +99,7 @@ export default function Login() {
                           }}
                           value={values.password}
                           onChange={handleChange}
-                          error={errors.password}
+                          error={touched.password && errors.password}
                         />
 
                       </CardInput>
@@ -111,7 +111,7 @@ export default function Login() {
                             isSubmitting &&
                             <Spinner className="h-4 w-4" />
                           }
-                          Criar conta
+                          Entrar
                         </Button>
                       </CardInput>
                     </RowForm>

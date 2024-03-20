@@ -1,7 +1,11 @@
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { useState } from "react";
+import { useContext } from "react";
+import { ImovelContext } from "../../../context/imovel-context";
 
-export default function TabBodyContato( { imovel } ) {
+export default function TabBodyContato() {
+
+    const imovel = useContext(ImovelContext);
 
     const [isModified, setIsModified] = useState(false);
     const [contatoNome, setContatoNome] = useState(imovel.nome);

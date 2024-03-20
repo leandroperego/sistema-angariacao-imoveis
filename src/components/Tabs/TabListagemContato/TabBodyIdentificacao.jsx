@@ -1,6 +1,10 @@
 import { Typography } from "@material-tailwind/react";
+import { useContext } from "react";
+import { ImovelContext } from "../../../context/imovel-context";
 
-export default function TabBodyIdentificacao({ imovel }) {
+export default function TabBodyIdentificacao() {
+
+    const imovel = useContext(ImovelContext);
 
     return (
         <section className="flex justify-between items-center">

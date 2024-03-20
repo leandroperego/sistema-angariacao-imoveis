@@ -1,8 +1,11 @@
 import { Textarea, Button } from "@material-tailwind/react";
-
 import { useState } from "react";
+import { useContext } from "react";
+import { ImovelContext } from "../../../context/imovel-context";
 
-export default function TabBodyAnotacoes( { imovel } ) {
+export default function TabBodyAnotacoes() {
+
+  const imovel = useContext(ImovelContext);
 
   const [isModified, setIsModified] = useState(false);
   const [contatoAnotacoes, setContatoAnotacoes] = useState(imovel.anotacoes);

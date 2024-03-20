@@ -3,6 +3,7 @@ import ListBody from '../components/List/ListBody';
 import ListItem from '../components/List/ListItem';
 import MainPages from '../components/MainPages';
 import CardListagem from '../components/Cards/CardListagem';
+import { ImovelProvider } from '../context/imovel-context';
 
 export default function ListagemContatos() {
 
@@ -42,15 +43,17 @@ export default function ListagemContatos() {
         <>
             <HeaderPages title="Listagem contatos" />
             <MainPages>
-                    <ListBody>
-                        {
-                            listaImoveisCadastrados.map((imovel, index) => (
-                                <ListItem key={index}>
-                                    <CardListagem imovel={imovel} />
-                                </ListItem>
-                            ))
-                        }
-                    </ListBody>
+                <ListBody>
+                    {
+                        listaImoveisCadastrados.map((imovel, index) => (
+                            <ListItem key={index}>
+                                <ImovelProvider imovel={imovel}>
+                                    <CardListagem />
+                                </ImovelProvider>
+                            </ListItem>
+                        ))
+                    }
+                </ListBody>
             </MainPages>
         </>
     );

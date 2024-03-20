@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, doc, getDoc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from '../firebase.config';
 
 const fornecedorCollection = collection(db, 'imoveis');
