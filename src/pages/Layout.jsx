@@ -28,13 +28,3 @@ export default function Layout() {
         </>
     );
 };
-
-{/* 
-    configurar filhos aside para quando determinado tamanho de tela exibir menuNavegacaoMobile e MenuNavegacaoDesktop 
-
-    no className do aside, determinar que quando a tela for a medida de desktop, ela ser fixa 20% com posicao fixa
-    e a section conteudo ser 80% com altura infinita
-
-    e criar um contexto para compartilhar os itens do menu
-*/
-}

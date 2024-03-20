@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
     Typography,
@@ -22,7 +22,19 @@ import {
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-export default function CardMenu( { closeCard } ) {
+import { efetuarLogout } from "../infra/auth/user";
+import { UserContext, usuarioInicial } from "../context/user-context";
+
+export default function CardMenu({ closeCard }) {
+
+    const navigate = useNavigate();
+    const {user, setUser } = useContext(UserContext);
+
+    const handleLogout = () => {
+        efetuarLogout();
+        setUser(usuarioInicial);
+        navigate("/login");
+    }
 
     return (
         <Card
@@ -56,23 +68,23 @@ export default function CardMenu( { closeCard } ) {
                 </Link>
 
                 <Link to={"listar-contatos"} onClick={closeCard}>
-                <ListItem>
-                    <ListItemPrefix>
-                        <PhoneArrowUpRightIcon className="h-5 w-5" />
-                    </ListItemPrefix>
-                    Contatos a fazer
-                    <ListItemSuffix>
-                        <Chip
-                            value="14"
-                            size="sm"
-                            variant="ghost"
-                            className="rounded-full text-blue-gray lg:*:text-blue-gray-50 lg:bg-blue-gray-300"
-                        />
-                    </ListItemSuffix>
-                </ListItem>
+                    <ListItem>
+                        <ListItemPrefix>
+                            <PhoneArrowUpRightIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Contatos a fazer
+                        <ListItemSuffix>
+                            <Chip
+                                value="14"
+                                size="sm"
+                                variant="ghost"
+                                className="rounded-full text-blue-gray lg:*:text-blue-gray-50 lg:bg-blue-gray-300"
+                            />
+                        </ListItemSuffix>
+                    </ListItem>
                 </Link>
 
-                <ListItem>
+                <ListItem onClick={handleLogout}>
                     <ListItemPrefix>
                         <PowerIcon className="h-5 w-5" />
                     </ListItemPrefix>
