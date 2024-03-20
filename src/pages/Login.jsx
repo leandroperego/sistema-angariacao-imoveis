@@ -5,7 +5,7 @@ import RowForm from "../components/Forms/formsComponents/RowForm";
 import * as formik from "formik";
 import * as yup from "yup";
 import { efetuarLogin } from "../infra/auth/user";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../context/user-context";
 
@@ -25,7 +25,7 @@ export default function Login() {
     const usuarioLogado = await efetuarLogin(values.email, values.password);
     if (!usuarioLogado) {
       alert("Email ou senha inválidos");
-    } else{
+    } else {
       setUser({ ...user, id: usuarioLogado.uid });
       navigate("/home");
     }
@@ -57,7 +57,7 @@ export default function Login() {
             }}
           >
             {
-              ({ handleSubmit, handleChange, resetForm, values, touched, errors }) => (
+              ({ handleSubmit, handleChange, resetForm, values, touched, errors, isSubmitting }) => (
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <ContainerForm >
                     <RowForm>
@@ -106,7 +106,13 @@ export default function Login() {
                     </RowForm>
                     <RowForm>
                       <CardInput>
-                        <Button type="submit" className="w-full" color="blue">Entrar</Button>
+                        <Button type="submit" fullWidth className="flex items-center justify-center gap-2" color="blue">
+                          {
+                            isSubmitting &&
+                            <Spinner className="h-4 w-4" />
+                          }
+                          Criar conta
+                        </Button>
                       </CardInput>
                     </RowForm>
                   </ContainerForm>

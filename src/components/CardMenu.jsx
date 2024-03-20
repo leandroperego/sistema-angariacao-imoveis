@@ -33,7 +33,7 @@ export default function CardMenu({ closeCard }) {
     const handleLogout = () => {
         efetuarLogout();
         setUser(usuarioInicial);
-        navigate("/login");
+        navigate("/");
     }
 
     return (

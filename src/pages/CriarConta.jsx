@@ -1,4 +1,4 @@
-import { Input, Button } from "@material-tailwind/react";
+import { Input, Button, Spinner } from "@material-tailwind/react";
 import CardInput from "../components/Forms/formsComponents/CardInput";
 import ContainerForm from "../components/Forms/formsComponents/ContainerForm";
 import RowForm from "../components/Forms/formsComponents/RowForm";
@@ -23,20 +23,27 @@ export default function CriarConta() {
         password: yup.string().required("Senha obrigatória"),
     });
 
-    const handleSubmit = async (values, resetForm) => {
-        const usuario = await criarUsuario(values.email, values.password);
-        if (!usuario) {
-            alert("Houve um erro ao criar sua conta. Tente novamente");
-            return;
-        }else{
-            alert("Conta criada com sucesso. Faça o login para continuar.");
-        }
-        resetForm();
-        setUser({...user,
+    const setUserForLogin = (values) => {
+        setUser({
+            ...user,
             nome: values.nome,
             email: values.email
         });
         navigate("/login");
+    }
+
+    const handleSubmit = async (values, resetForm) => {
+        const usuarioRef = await criarUsuario(values);
+
+        if (!usuarioRef) {
+            alert("Houve um erro ao criar sua conta. Tente novamente");
+            return;
+        } else {
+            alert("Conta criada com sucesso. Faça o login para continuar.");
+        }
+        resetForm();
+
+        setUserForLogin(values);
     }
 
     return (
@@ -65,7 +72,7 @@ export default function CriarConta() {
                         }}
                     >
                         {
-                            ({ handleSubmit, handleChange, resetForm, values, touched, errors }) => (
+                            ({ handleSubmit, handleChange, resetForm, values, touched, errors, isSubmitting }) => (
                                 <form className="space-y-6" onSubmit={handleSubmit}>
                                     <ContainerForm >
                                         <RowForm>
@@ -134,7 +141,13 @@ export default function CriarConta() {
                                         </RowForm>
                                         <RowForm>
                                             <CardInput>
-                                                <Button type="submit" className="w-full" color="blue">Criar conta</Button>
+                                                <Button type="submit" fullWidth className="flex items-center justify-center gap-2" color="blue">
+                                                    {
+                                                        isSubmitting &&
+                                                        <Spinner className="h-4 w-4"/>                                              
+                                                    }
+                                                    Criar conta
+                                                </Button>
                                             </CardInput>
                                         </RowForm>
                                     </ContainerForm>

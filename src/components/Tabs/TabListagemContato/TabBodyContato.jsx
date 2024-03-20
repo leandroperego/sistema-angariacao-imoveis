@@ -25,18 +25,6 @@ export default function TabBodyContato( { imovel } ) {
         setIsModified(!isModified);
     }
 
-    const handleBlur = (e) => {
-        // if (isModified) {
-        //     let confirmacao = confirm("Você modificou o nome e não clicou em atualizar. Tem certeza que quer cancelar?");
-        //     if (confirmacao){
-        //         setIsModified(!isModified);
-        //         setContatoNome(contato.nome);
-        //     }else{
-        //         setContatoNome(e.target.value);
-        //     }
-        // }
-    }
-
     return (
         <section className="flex flex-col gap-6">
             <div>
@@ -52,7 +40,6 @@ export default function TabBodyContato( { imovel } ) {
                         }}
                         value={contatoNome}
                         onChange={handleChange}
-                        onBlur={handleBlur}
                     />
                     <div className="sm:absolute right-1 top-1 rounded flex gap-2">
                         <Button
