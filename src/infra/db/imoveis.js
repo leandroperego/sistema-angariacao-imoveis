@@ -1,4 +1,4 @@
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from '../firebase.config';
 
 const fornecedorCollection = collection(db, 'imoveis');
@@ -16,4 +16,13 @@ export const addImovel = async (imovel) => {
         });
 
     return imovelId;
+}
+
+export const getImoveis = async () => {
+    const imoveis = [];
+    const querySnapshot = await getDocs(fornecedorCollection);
+    querySnapshot.forEach((doc) => {
+        imoveis.push(doc.data());
+    });
+    return imoveis;
 }
