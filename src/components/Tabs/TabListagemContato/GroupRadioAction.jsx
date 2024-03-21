@@ -8,7 +8,7 @@ import {
     IconButton,
 } from "@material-tailwind/react";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ImovelContext } from "../../../context/imovel-context";
 import { ListaImoveisContext } from "../../../context/lista-imoveis-context";
 import { updateImovel } from "../../../infra/db/imoveis";
@@ -20,10 +20,23 @@ export default function GroupRadioAction() {
     const imovelAtual = useContext(ImovelContext);
     const { updateLista, setUpdateLista } = useContext(ListaImoveisContext);
 
-    const [radioChecked, setRadioChecked] = useState(null);
+    const [radioChecked, setRadioChecked] = useState();
+    const [isModified, setIsModified] = useState();
+
+    useEffect(() => {
+        setRadioChecked(imovelAtual.status);
+        setIsModified(false);
+    }, [imovelAtual.status])
+
 
     const handleChange = (e) => {
         setRadioChecked(e.target.value);
+        setIsModified(true);
+    }
+
+    const handleCancelChange = () => {
+        setRadioChecked(imovelAtual.status);
+        setIsModified(false);
     }
 
     const handleConfirmRadio = async () => {
@@ -35,7 +48,8 @@ export default function GroupRadioAction() {
                 alert("Houve um erro: " + error.message);
             });
 
-        setRadioChecked(null);
+        setRadioChecked(imovelAtual.status);
+        setIsModified(false);
         setUpdateLista(!updateLista);
     };
 
@@ -103,9 +117,9 @@ export default function GroupRadioAction() {
                 </ListItem>
             </List>
 
-            <div className={radioChecked ? "flex flex-row pb-3" : "hidden"}>
+            <div className={radioChecked && isModified ? "flex flex-row pb-3" : "hidden"}>
                 <IconButton variant="outlined" color="red" size="sm" className="mr-4">
-                    <XMarkIcon className="h-6 w-6 text-red-900" onClick={() => setRadioChecked(null)}/>
+                    <XMarkIcon className="h-6 w-6 text-red-900" onClick={handleCancelChange}/>
                 </IconButton>
                 <IconButton variant="outlined" color="green" size="sm" className="mr-4" onClick={handleConfirmRadio}>
                     <CheckIcon className="h-6 w-6 text-green-900" />

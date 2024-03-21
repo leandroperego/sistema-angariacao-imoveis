@@ -3,7 +3,7 @@ import ListItem from '../components/List/ListItem';
 import MainPages from '../components/MainPages';
 import CardListagem from '../components/Cards/CardListagem';
 import { ImovelProvider } from '../context/imovel-context';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { ListaImoveisContext } from '../context/lista-imoveis-context';
 import BarraDeFiltragem from '../components/BarraDeFiltragem';
 
@@ -11,7 +11,12 @@ export default function ListagemContatos() {
 
     const { listaImoveis } = useContext(ListaImoveisContext);
 
-    const [listagemFiltrada, setListagemFiltrada] = useState(listaImoveis?.filter(imovel => imovel.status === '') || []);
+    const [listagemFiltrada, setListagemFiltrada] = useState();
+    const [filtroAtual, setFiltroAtual] = useState('');
+
+    useEffect(() => {
+        setListagemFiltrada(listaImoveis?.filter(imovel => imovel.status === filtroAtual) || []);
+    }, [listaImoveis]);
 
     function getListStatusFiltered(list, statusFilter){
         let novaLista = list.filter(obj => obj.status === statusFilter);
@@ -19,6 +24,7 @@ export default function ListagemContatos() {
     }
 
     function handleFilter(statusFilter){
+        setFiltroAtual(statusFilter);
         if (statusFilter === undefined){
             setListagemFiltrada(listaImoveis);
         }else if(statusFilter === ''){

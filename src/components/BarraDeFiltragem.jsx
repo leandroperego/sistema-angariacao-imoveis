@@ -1,22 +1,24 @@
 import { Button, ButtonGroup } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function BarraDeFiltragem( { handleFilter } ) {
 
     const [btnAtual, setBtnAtual] = useState('nao_realizado');
 
+    useEffect(() => {
+
+        if (btnAtual === 'todos'){
+            handleFilter();
+        } else if(btnAtual === 'nao_realizado'){
+            handleFilter('');
+        } else{
+            handleFilter(btnAtual);
+        }
+    }, [btnAtual]);
+
     function handleClick(e){
         const btn = e.target;
         setBtnAtual(btn.value);
-        
-        if (btn.value === 'todos'){
-            handleFilter();
-        } else if(btn.value === 'nao_realizado'){
-            handleFilter('');
-        } else{
-            handleFilter(e.target.value);
-        }
-
     }
 
     return (
