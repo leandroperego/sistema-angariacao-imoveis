@@ -2,6 +2,7 @@ import { Textarea, Button } from "@material-tailwind/react";
 import { useState } from "react";
 import { useContext } from "react";
 import { ImovelContext } from "../../../context/imovel-context";
+import { updateImovel } from "../../../infra/db/imoveis";
 
 export default function TabBodyAnotacoes() {
 
@@ -20,14 +21,15 @@ export default function TabBodyAnotacoes() {
     setIsModified(!isModified);
   }
 
-  const handleAtualizacao = () => {
+  const handleAtualizacao = async () => {
 
-    // Aqui fazer a atualizacao das anotacoes no contato de id contato
-    /*
-        async atualizarAnotacoes(id, contatoAnotacoes)
-    */
-
-    alert("Anotações: " + contatoAnotacoes);
+    await updateImovel(imovel.id, { anotacoes: contatoAnotacoes })
+            .then(() => {
+                alert("Anotações atualizadas com sucesso.")
+            })
+            .catch((error) => {
+                alert("Houve um erro: " + error.message);
+            });
   }
 
   return (

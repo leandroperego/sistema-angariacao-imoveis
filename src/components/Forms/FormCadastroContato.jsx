@@ -37,7 +37,7 @@ export default function FormCadastroContato() {
     });
 
     const handleSubmit = async (data, reset) => {
-        const imovelId = await addImovel({...data, status: ''});
+        const imovelId = await addImovel({...data, status: '', anotacoes: ''});
 
         if (imovelId) {
             alert('Imóvel registrado com sucesso!');

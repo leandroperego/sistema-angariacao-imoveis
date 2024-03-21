@@ -2,6 +2,7 @@ import { Typography, Input, Button } from "@material-tailwind/react";
 import { useState } from "react";
 import { useContext } from "react";
 import { ImovelContext } from "../../../context/imovel-context";
+import { updateImovel } from "../../../infra/db/imoveis";
 
 export default function TabBodyContato() {
 
@@ -15,12 +16,14 @@ export default function TabBodyContato() {
         setContatoNome(e.target.value);
     }
 
-    const handleAtualizar = () => {
-        // Aqui fazer a atualizacao do nome do proprietario no contato de id contato
-        /*
-            async atualizarNomeContato(id, contatoNome)
-        */
-        alert("Novo nome: " + contatoNome);
+    const handleAtualizar = async () => {
+        await updateImovel(imovel.id, { nome: contatoNome })
+            .then(() => {
+                alert("Nome do responsável atualizado com sucesso.")
+            })
+            .catch((error) => {
+                alert("Houve um erro: " + error.message);
+            })
         setIsModified(!isModified);
     }
 
