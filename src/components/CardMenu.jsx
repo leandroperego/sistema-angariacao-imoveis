@@ -47,7 +47,7 @@ export default function CardMenu({ closeCard }) {
             className="h-[calc(100vh-2rem)] w-full p-4"
         >
             <div className="mb-2 flex items-center justify-between lg:justify-normal lg:gap-4 p-4">
-                <Link to={"home"} onClick={closeCard}>
+                <Link to={"/home"} onClick={closeCard}>
                     <img
                         src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                         alt="logo"
@@ -62,7 +62,7 @@ export default function CardMenu({ closeCard }) {
                 </IconButton>
             </div>
             <List className="lg:*:text-white">
-                <Link to={"cadastrar-contato"} onClick={closeCard}>
+                <Link to={"/cadastrar-contato"} onClick={closeCard}>
                     <ListItem>
                         <ListItemPrefix>
                             <PlusCircleIcon className="h-5 w-5" />
@@ -71,7 +71,7 @@ export default function CardMenu({ closeCard }) {
                     </ListItem>
                 </Link>
 
-                <Link to={"listar-contatos"} onClick={closeCard}>
+                <Link to={"/listar-contatos"} onClick={closeCard}>
                     <ListItem>
                         <ListItemPrefix>
                             <PhoneArrowUpRightIcon className="h-5 w-5" />
