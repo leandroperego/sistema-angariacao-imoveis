@@ -202,7 +202,7 @@ export default function FormCadastroContato() {
 
                                 <CardInput>
                                     <Input
-                                        label="Nome"
+                                        label="Nome do responsável"
                                         name="nome"
                                         value={values.nome}
                                         onChange={handleChange}
