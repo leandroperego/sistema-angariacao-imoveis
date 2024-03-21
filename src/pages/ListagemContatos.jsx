@@ -9,24 +9,25 @@ import BarraDeFiltragem from '../components/BarraDeFiltragem';
 
 export default function ListagemContatos() {
 
-    const { listagem } = useContext(ListaImoveisContext);
-    console.log(listagem);
+    const { listaImoveis } = useContext(ListaImoveisContext);
 
-    const [listagemFiltrada, setListagemFiltrada] = useState(listagem);
+    const [listagemFiltrada, setListagemFiltrada] = useState(listaImoveis?.filter(imovel => imovel.status === '') || []);
 
     function getListStatusFiltered(list, statusFilter){
         let novaLista = list.filter(obj => obj.status === statusFilter);
-        console.log(novaLista);
         return novaLista
     }
 
     function handleFilter(statusFilter){
-        if (!statusFilter){
-            setListagemFiltrada(listagem);
+        if (statusFilter === undefined){
+            setListagemFiltrada(listaImoveis);
+        }else if(statusFilter === ''){
+            const novaListagem = getListStatusFiltered(listaImoveis, statusFilter);
+            setListagemFiltrada(novaListagem);
+        }else{
+            const novaListagem = getListStatusFiltered(listaImoveis, statusFilter);
+            setListagemFiltrada(novaListagem);
         }
-
-        const novaListagem = getListStatusFiltered(listagem, statusFilter);
-        setListagemFiltrada(novaListagem);
     }
 
 
@@ -34,9 +35,9 @@ export default function ListagemContatos() {
         <>
             <header className='bg-white shadow flex flex-col items-center pt-4'>
                 <h2 className='text-3xl font-bold'>Listagem de imóveis</h2>
-                <div className='w-full p-4 pb-0 mt-2 bg-blue-gray-100 flex flex-col items-center justify-between gap-2'>
+                <div className='w-full p-4 pb-0 mt-2 flex flex-col items-center justify-between gap-2'>
                     <span className='font-medium'>Filtro: </span>
-                    <BarraDeFiltragem listagem={listagem} handleFilter={handleFilter} />
+                    <BarraDeFiltragem handleFilter={handleFilter} />
                 </div>
             </header>
             <MainPages>
@@ -46,7 +47,6 @@ export default function ListagemContatos() {
                             <ListItem key={index}>
                                 <ImovelProvider imovel={imovel}>
                                     {
-                                        imovel.status === '' &&
                                         <CardListagem />
                                     }
                                 </ImovelProvider>

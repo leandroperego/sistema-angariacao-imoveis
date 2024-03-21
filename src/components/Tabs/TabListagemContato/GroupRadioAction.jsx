@@ -50,7 +50,7 @@ export default function GroupRadioAction() {
                         <ListItemPrefix className="mr-3">
                             <Radio
                                 color="green"
-                                checked={radioChecked === "aprovado"}
+                                checked={radioChecked == "aprovado"}
                                 name="validacao"
                                 id="aprovado"
                                 ripple={false}
@@ -78,7 +78,7 @@ export default function GroupRadioAction() {
                         <ListItemPrefix className="mr-3">
                             <Radio
                                 color="red"
-                                checked={radioChecked === "rejeitado"}
+                                checked={radioChecked == "rejeitado"}
                                 name="validacao"
                                 id="rejeitado"
                                 ripple={false}

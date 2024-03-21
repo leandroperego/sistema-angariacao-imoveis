@@ -24,8 +24,12 @@ import {
 
 import { efetuarLogout } from "../infra/auth/user";
 import { UserContext, usuarioInicial } from "../context/user-context";
+import { ListaImoveisContext } from "../context/lista-imoveis-context";
 
-export default function CardMenu({ closeCard, tamanhoLista }) {
+export default function CardMenu({ closeCard }) {
+
+    const {listaImoveis} = useContext(ListaImoveisContext);
+    let tamanhoLista = listaImoveis?.filter(imovel => imovel.status === '').length || 0;
 
     const navigate = useNavigate();
     const {user, setUser } = useContext(UserContext);
@@ -75,7 +79,7 @@ export default function CardMenu({ closeCard, tamanhoLista }) {
                         Contatos a fazer
                         <ListItemSuffix>
                             <Chip
-                                value={tamanhoLista ? tamanhoLista : 0}
+                                value={tamanhoLista}
                                 size="sm"
                                 variant="ghost"
                                 className="rounded-full text-blue-gray lg:*:text-blue-gray-50 lg:bg-blue-gray-300"

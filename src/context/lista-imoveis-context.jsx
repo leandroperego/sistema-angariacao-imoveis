@@ -1,10 +1,23 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
+import { getImoveis } from "../infra/db/imoveis";
 
 export const ListaImoveisContext = createContext({});
 
-export const ListaProvider = ({ children, listagem, updateLista, setUpdateLista }) => {
+export const ListaProvider = ({ children }) => {
+
+    const [listaImoveis, setListaImoveis] = useState([]);
+    const [updateLista, setUpdateLista] = useState(false);
+
+    useEffect(() => {
+        async function fetchData() {
+            const imoveis = await getImoveis();
+            setListaImoveis(imoveis);
+        }
+        fetchData();
+    }, [updateLista]);
+
     return (
-        <ListaImoveisContext.Provider value={{listagem, updateLista, setUpdateLista}}>
+        <ListaImoveisContext.Provider value={{listaImoveis, updateLista, setUpdateLista}}>
             {children}
         </ListaImoveisContext.Provider>
     );
