@@ -21,7 +21,7 @@ export default function Layout() {
                 </aside>
                 <section className="lg:absolute top-0 left-1/3 lg:w-2/3 2xl:w-3/4 2xl:left-1/4">
                     <main>
-                        <Outlet />
+                        <Outlet/>
                     </main>
                     <footer className="rodape-principal">
 

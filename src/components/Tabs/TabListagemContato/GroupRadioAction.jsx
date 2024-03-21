@@ -23,7 +23,7 @@ export default function GroupRadioAction() {
     const [radioChecked, setRadioChecked] = useState(null);
 
     const handleChange = (e) => {
-        setRadioChecked(e.target.id);
+        setRadioChecked(e.target.value);
     }
 
     const handleConfirmRadio = async () => {
@@ -44,15 +44,16 @@ export default function GroupRadioAction() {
             <List className="w-full flex-row flex-wrap justify-center">
                 <ListItem className="max-w-fit p-0">
                     <label
-                        htmlFor="aprovado"
+                        htmlFor={`aprovado-${imovelAtual.id}`}
                         className="flex w-full cursor-pointer items-center p-2"
                     >
                         <ListItemPrefix className="mr-3">
                             <Radio
                                 color="green"
                                 checked={radioChecked == "aprovado"}
-                                name="validacao"
-                                id="aprovado"
+                                name={`validacao-${imovelAtual.id}`}
+                                id={`aprovado-${imovelAtual.id}`}
+                                value={"aprovado"}
                                 ripple={false}
                                 className="hover:before:opacity-0"
                                 containerProps={{
@@ -72,15 +73,16 @@ export default function GroupRadioAction() {
                 </ListItem>
                 <ListItem className="max-w-fit p-0">
                     <label
-                        htmlFor="rejeitado"
+                        htmlFor={`rejeitado-${imovelAtual.id}`}
                         className="flex w-full cursor-pointer items-center p-2"
                     >
                         <ListItemPrefix className="mr-3">
                             <Radio
                                 color="red"
                                 checked={radioChecked == "rejeitado"}
-                                name="validacao"
-                                id="rejeitado"
+                                name={`validacao-${imovelAtual.id}`}
+                                id={`rejeitado-${imovelAtual.id}`}
+                                value={"rejeitado"}
                                 ripple={false}
                                 className="hover:before:opacity-0"
                                 containerProps={{

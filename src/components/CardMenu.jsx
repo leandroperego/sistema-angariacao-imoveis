@@ -67,7 +67,7 @@ export default function CardMenu({ closeCard }) {
                         <ListItemPrefix>
                             <PlusCircleIcon className="h-5 w-5" />
                         </ListItemPrefix>
-                        Cadastrar
+                        Cadastrar imóvel
                     </ListItem>
                 </Link>
 
