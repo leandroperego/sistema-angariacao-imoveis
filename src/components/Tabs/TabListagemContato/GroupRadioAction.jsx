@@ -10,6 +10,7 @@ import {
 
 import { useState, useContext } from "react";
 import { ImovelContext } from "../../../context/imovel-context";
+import { ListaImoveisContext } from "../../../context/lista-imoveis-context";
 import { updateImovel } from "../../../infra/db/imoveis";
 
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
@@ -17,6 +18,8 @@ import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 export default function GroupRadioAction() {
 
     const imovelAtual = useContext(ImovelContext);
+    const { updateLista, setUpdateLista } = useContext(ListaImoveisContext);
+
     const [radioChecked, setRadioChecked] = useState(null);
 
     const handleChange = (e) => {
@@ -33,6 +36,7 @@ export default function GroupRadioAction() {
             });
 
         setRadioChecked(null);
+        setUpdateLista(!updateLista);
     };
 
     return (

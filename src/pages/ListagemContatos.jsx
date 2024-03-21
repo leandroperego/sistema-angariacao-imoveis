@@ -4,13 +4,14 @@ import ListItem from '../components/List/ListItem';
 import MainPages from '../components/MainPages';
 import CardListagem from '../components/Cards/CardListagem';
 import { ImovelProvider } from '../context/imovel-context';
+import { ListaProvider } from '../context/lista-imoveis-context';
 import { useEffect, useState } from 'react';
 import { getImoveis } from '../infra/db/imoveis';
 
 export default function ListagemContatos() {
 
     const [listaImoveisCadastrados, setListaImoveisCadastrados] = useState([]);
-    // const [updateLista, setUpdateLista] = useState(false);
+    const [updateLista, setUpdateLista] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -19,13 +20,14 @@ export default function ListagemContatos() {
         }
 
         fetchData();
-    }, []);
+    }, [updateLista]);
 
     return (
         <>
             <HeaderPages title="Listagem contatos" />
             <MainPages>
                 <ListBody>
+                    <ListaProvider listagem={listaImoveisCadastrados} updateLista={updateLista} setUpdateLista={setUpdateLista}>
                     {
                         listaImoveisCadastrados.map((imovel, index) => (
                             <ListItem key={index}>
@@ -38,6 +40,7 @@ export default function ListagemContatos() {
                             </ListItem>
                         ))
                     }
+                    </ListaProvider>
                 </ListBody>
             </MainPages>
         </>
