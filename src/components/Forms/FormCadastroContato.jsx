@@ -5,7 +5,8 @@ import {
     Input,
     Select,
     Option,
-    Button
+    Button,
+    Spinner,
 } from "@material-tailwind/react";
 import CardInput from './formsComponents/CardInput';
 import RowForm from './formsComponents/RowForm';
@@ -36,7 +37,7 @@ export default function FormCadastroContato() {
     });
 
     const handleSubmit = async (data, reset) => {
-        const imovelId = await addImovel(data);
+        const imovelId = await addImovel({...data, status: ''});
 
         if (imovelId) {
             alert('Imóvel registrado com sucesso!');
@@ -65,7 +66,7 @@ export default function FormCadastroContato() {
             }}
         >
             {
-                ({ handleSubmit, handleChange, resetForm, values, setValues, touched, errors }) => (
+                ({ handleSubmit, handleChange, resetForm, values, setValues, touched, errors, isSubmitting }) => (
                     <form onSubmit={handleSubmit}>
                         {/* Dados do Imóvel */}
                         <ContainerForm title='Dados do Imóvel'>
@@ -227,9 +228,13 @@ export default function FormCadastroContato() {
                         </ContainerForm>
                         <Button
                             color="blue"
-                            className="min-w-min w-full sm:w-2/5 md:w-1/5 lg:w-auto"
+                            className="min-w-min w-full sm:w-2/5 md:w-1/5 lg:w-auto flex items-center justify-center gap-2"
                             type='submit'
                         >
+                            {
+                                isSubmitting && 
+                                    <Spinner className='w-4 h-4'/>
+                            }
                             Cadastrar
                         </Button>
                     </form>

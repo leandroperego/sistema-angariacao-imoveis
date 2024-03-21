@@ -8,20 +8,31 @@ import {
     IconButton,
 } from "@material-tailwind/react";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ImovelContext } from "../../../context/imovel-context";
+import { updateImovel } from "../../../infra/db/imoveis";
 
 import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
 export default function GroupRadioAction() {
 
+    const imovelAtual = useContext(ImovelContext);
     const [radioChecked, setRadioChecked] = useState(null);
 
     const handleChange = (e) => {
         setRadioChecked(e.target.id);
     }
 
-    const handleConfirmRadio = () => {
-       alert(radioChecked);
+    const handleConfirmRadio = async () => {
+        await updateImovel(imovelAtual.id, { status: radioChecked })
+            .then(() => {
+                alert("Imóvel atualizado com sucesso!");
+            })
+            .catch((error) => {
+                alert("Houve um erro: " + error.message);
+            });
+
+        setRadioChecked(null);
     };
 
     return (

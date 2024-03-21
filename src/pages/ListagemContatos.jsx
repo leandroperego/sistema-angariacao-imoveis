@@ -10,6 +10,7 @@ import { getImoveis } from '../infra/db/imoveis';
 export default function ListagemContatos() {
 
     const [listaImoveisCadastrados, setListaImoveisCadastrados] = useState([]);
+    // const [updateLista, setUpdateLista] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -29,7 +30,10 @@ export default function ListagemContatos() {
                         listaImoveisCadastrados.map((imovel, index) => (
                             <ListItem key={index}>
                                 <ImovelProvider imovel={imovel}>
-                                    <CardListagem />
+                                    {
+                                        imovel.status === '' &&
+                                        <CardListagem />
+                                    }
                                 </ImovelProvider>
                             </ListItem>
                         ))
