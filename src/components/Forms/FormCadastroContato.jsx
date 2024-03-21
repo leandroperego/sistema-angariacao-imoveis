@@ -7,14 +7,18 @@ import {
     Option,
     Button,
     Spinner,
+    Textarea,
 } from "@material-tailwind/react";
 import CardInput from './formsComponents/CardInput';
 import RowForm from './formsComponents/RowForm';
 import ContainerForm from './formsComponents/ContainerForm';
 import { addImovel } from '../../infra/db/imoveis';
+import { useContext } from 'react';
+import { ListaImoveisContext } from '../../context/lista-imoveis-context';
 
 export default function FormCadastroContato() {
     const { Formik } = formik;
+    const {updateLista, setUpdateLista} = useContext(ListaImoveisContext)
 
     const tiposImoveis = [
         'Casa',
@@ -34,15 +38,17 @@ export default function FormCadastroContato() {
         nome: yup.string(),
         telefone1: yup.string().required('Campo obrigatório'),
         telefone2: yup.string(),
+        anotacoes: yup.string(),
     });
 
     const handleSubmit = async (data, reset) => {
-        const imovelId = await addImovel({...data, status: '', anotacoes: ''});
+        const imovelId = await addImovel({ ...data, status: '', anotacoes: '' });
 
         if (imovelId) {
             alert('Imóvel registrado com sucesso!');
+            setUpdateLista(!updateLista);
             reset();
-        } else{
+        } else {
             alert('Houve um erro ao registrar o imóvel. Tente novamente');
         }
 
@@ -63,6 +69,7 @@ export default function FormCadastroContato() {
                 nome: '',
                 telefone1: '',
                 telefone2: '',
+                anotacoes: '',
             }}
         >
             {
@@ -225,6 +232,22 @@ export default function FormCadastroContato() {
                                 </CardInput>
 
                             </RowForm>
+                            <ContainerForm title={'Anotações gerais'} containerProps={{ className: '!mb-0' }}>
+                                <RowForm>
+                                    <CardInput >
+                                        <Textarea
+                                            className="text-sm"
+                                            variant="outlined"
+                                            label='Anotações'
+                                            name='anotacoes'
+                                            rows={5}
+                                            value={values.anotacoes}
+                                            onChange={handleChange}
+                                        />
+                                    </CardInput>
+                                </RowForm>
+                            </ContainerForm>
+
                         </ContainerForm>
                         <Button
                             color="blue"
@@ -232,8 +255,8 @@ export default function FormCadastroContato() {
                             type='submit'
                         >
                             {
-                                isSubmitting && 
-                                    <Spinner className='w-4 h-4'/>
+                                isSubmitting &&
+                                <Spinner className='w-4 h-4' />
                             }
                             Cadastrar
                         </Button>
