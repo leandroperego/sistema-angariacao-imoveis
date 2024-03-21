@@ -25,7 +25,7 @@ import {
 import { efetuarLogout } from "../infra/auth/user";
 import { UserContext, usuarioInicial } from "../context/user-context";
 
-export default function CardMenu({ closeCard }) {
+export default function CardMenu({ closeCard, tamanhoLista }) {
 
     const navigate = useNavigate();
     const {user, setUser } = useContext(UserContext);
@@ -75,7 +75,7 @@ export default function CardMenu({ closeCard }) {
                         Contatos a fazer
                         <ListItemSuffix>
                             <Chip
-                                value="14"
+                                value={tamanhoLista ? tamanhoLista : 0}
                                 size="sm"
                                 variant="ghost"
                                 className="rounded-full text-blue-gray lg:*:text-blue-gray-50 lg:bg-blue-gray-300"

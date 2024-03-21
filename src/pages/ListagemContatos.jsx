@@ -4,32 +4,20 @@ import ListItem from '../components/List/ListItem';
 import MainPages from '../components/MainPages';
 import CardListagem from '../components/Cards/CardListagem';
 import { ImovelProvider } from '../context/imovel-context';
-import { ListaProvider } from '../context/lista-imoveis-context';
-import { useEffect, useState } from 'react';
-import { getImoveis } from '../infra/db/imoveis';
+import { useContext } from 'react';
+import { ListaImoveisContext } from '../context/lista-imoveis-context';
 
 export default function ListagemContatos() {
 
-    const [listaImoveisCadastrados, setListaImoveisCadastrados] = useState([]);
-    const [updateLista, setUpdateLista] = useState(false);
-
-    useEffect(() => {
-        async function fetchData() {
-            const imoveis = await getImoveis();
-            setListaImoveisCadastrados(imoveis);
-        }
-
-        fetchData();
-    }, [updateLista]);
+    const { listagem } = useContext(ListaImoveisContext);
 
     return (
         <>
             <HeaderPages title="Listagem contatos" />
             <MainPages>
                 <ListBody>
-                    <ListaProvider listagem={listaImoveisCadastrados} updateLista={updateLista} setUpdateLista={setUpdateLista}>
                     {
-                        listaImoveisCadastrados.map((imovel, index) => (
+                        listagem?.map((imovel, index) => (
                             <ListItem key={index}>
                                 <ImovelProvider imovel={imovel}>
                                     {
@@ -40,7 +28,6 @@ export default function ListagemContatos() {
                             </ListItem>
                         ))
                     }
-                    </ListaProvider>
                 </ListBody>
             </MainPages>
         </>
