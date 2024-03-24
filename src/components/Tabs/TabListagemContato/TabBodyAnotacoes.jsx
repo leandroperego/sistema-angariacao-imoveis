@@ -35,6 +35,8 @@ export default function TabBodyAnotacoes() {
   return (
     <div className="relative">
       <Textarea
+        name={`anotacoes-${imovel.id}`}
+        id={`anotacoes-${imovel.id}`}
         className="text-xl"
         variant="static"
         placeholder="Faça aqui suas anotações"

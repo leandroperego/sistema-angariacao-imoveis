@@ -14,28 +14,28 @@ function App() {
   const { user } = useContext(UserContext);
 
   return (
-    <Router basename='/sistema-angariacao-imoveis'>
-    {/* <Router> */}
-        <Routes>
-          {
-            !user.id
-              ? (
-                <>
-                  <Route path='/' element={<Login />} />
-                  <Route path='/criar-conta' element={<CriarConta />} />
-                  <Route path='/login' element={<Login />} />
-                  <Route path='/*' element={<Login />} />
-                </>
-              ) : (
-                <Route path="/" element={<Layout />}>
-                  <Route index path='/' element={<Home />} />
-                  <Route path='/home' element={<Home />} />
-                  <Route path='/cadastrar-contato' element={<CadastrarContato />} />
-                  <Route path='/listar-contatos' element={<ListagemContatos />} />
-                </Route >
-              )
-          }
-        </Routes>
+    // <Router basename='/sistema-angariacao-imoveis'>
+    <Router>
+      <Routes>
+        {
+          !user.id
+            ? (
+              <>
+                <Route path='/' element={<Login />} />
+                <Route path='/criar-conta' element={<CriarConta />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/*' element={<Login />} />
+              </>
+            ) : (
+              <Route path="/" element={<Layout />}>
+                <Route index path='/' element={<Home />} />
+                <Route path='/home' element={<Home />} />
+                <Route path='/cadastrar-contato' element={<CadastrarContato />} />
+                <Route path='/listar-contatos' element={<ListagemContatos />} />
+              </Route >
+            )
+        }
+      </Routes>
     </Router>
 
   )

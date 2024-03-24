@@ -1,10 +1,9 @@
 import { Button, ButtonGroup } from "@material-tailwind/react";
 
-export default function BarraDeFiltragem({ btnAtual, setBtnAtual }) {
+export default function BarraDeFiltragem({ btnAtual, handleChangeBarraFiltragem }) {
     
     function handleClick(e) {
-        const btn = e.target;
-        setBtnAtual(btn.value);
+        handleChangeBarraFiltragem(e.target.value);
     }
 
     return (

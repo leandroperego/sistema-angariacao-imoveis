@@ -11,6 +11,7 @@ export default function TabBodyContato() {
     const [isModified, setIsModified] = useState(false);
     const [contatoNome, setContatoNome] = useState(imovel.nome);
 
+
     const handleChange = (e) => {
         setIsModified(true);
         setContatoNome(e.target.value);
@@ -35,12 +36,14 @@ export default function TabBodyContato() {
     return (
         <section className="flex flex-col gap-6">
             <div>
-                <Typography>
+                <label htmlFor={`nomeContato-${imovel.id}`}>
                     Responsável:
-                </Typography>
+                </label>
                 <div className="relative w-full flex flex-wrap md:block gap-2">
                     <Input
                         type="text"
+                        name={`nomeContato-${imovel.id}`}
+                        id={`nomeContato-${imovel.id}`}
                         className={`pr-20 !border !border-gray-500 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 placeholder:opacity-100 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10`}
                         labelProps={{
                             className: 'hidden',
