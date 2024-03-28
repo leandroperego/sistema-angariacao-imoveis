@@ -1,5 +1,5 @@
 import { db } from '../firebase.config';
-import { collection, setDoc, doc } from "firebase/firestore";
+import { collection, setDoc, doc, getDoc } from "firebase/firestore";
 
 const usersCollection = collection(db, 'users');
 
@@ -11,10 +11,10 @@ export const addUser = async (user) => {
     });
 }
 
-// export const getUser = async (id) => {
-//     const user = await getDoc(doc(usersCollection, id));
-//     return user.data();
-// }
+export const getUser = async (id) => {
+    const user = await getDoc(doc(usersCollection, id));
+    return {...user.data(), id: user.id};
+}
 
 // export const getUsers = async () => {
 //     const users = [];

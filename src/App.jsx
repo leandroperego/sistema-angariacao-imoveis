@@ -18,7 +18,7 @@ function App() {
     <Router>
       <Routes>
         {
-          !user.id
+          !user.id && !sessionStorage.getItem("user")
             ? (
               <>
                 <Route path='/' element={<Login />} />

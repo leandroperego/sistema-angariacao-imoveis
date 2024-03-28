@@ -1,5 +1,5 @@
 import { auth } from "../firebase.config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { addUser } from "../db/users";
 
 export const criarUsuario = async (usuario) => {
@@ -20,7 +20,7 @@ export const criarUsuario = async (usuario) => {
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
         });
-    
+
     return usuarioCriado;
 }
 
@@ -28,23 +28,19 @@ export const efetuarLogin = async (email, password) => {
 
     let usuario = null;
 
-    await setPersistence(auth, browserSessionPersistence)
-        .then(async () => {return await signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 usuario = userCredential.user;
-                // console.log(user);
+                sessionStorage.setItem("user", JSON.stringify({ id: usuario.uid, email: email, password: password }));
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
-            })})
-        .catch((error) => {
-            console.log(error);
-        })
+            })
 
-            return usuario;
-    }
+    return usuario;
+}
 
 export const efetuarLogout = () => {
     auth.signOut();
