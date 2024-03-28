@@ -8,12 +8,19 @@ import {
 import TabBodyIdentificacao from "../TabListagemContato/TabBodyIdentificacao";
 import TabBodyContato from "./TabBodyContato";
 import TabBodyAnotacoes from "./TabBodyAnotacoes";
-import { useContext} from "react";
+import { useContext, useEffect, useState} from "react";
 import { ImovelContext } from "../../../context/imovel-context";
 
 export default function TabListagemContato() {
 
   const imovel = useContext(ImovelContext);
+
+  // const [imovelId, setImovelId] = useState(imovel.id);
+
+  useEffect(() => {
+    console.log('useEffect')
+    console.log(imovel.id)
+  }, [imovel.id]);
 
   const tabs = [
     {

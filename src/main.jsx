@@ -7,11 +7,11 @@ import { UserProvider } from './context/user-context.jsx';
 import { ThemeProvider } from '@material-tailwind/react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ThemeProvider>
       <UserProvider>
         <App />
       </UserProvider>
     </ThemeProvider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

@@ -3,7 +3,7 @@ import ListItem from '../components/List/ListItem';
 import MainPages from '../components/MainPages';
 import CardListagem from '../components/Cards/CardListagem';
 import { ImovelProvider } from '../context/imovel-context';
-import { useContext, useReducer } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { ListaImoveisContext } from '../context/lista-imoveis-context';
 import BarraDeFiltragem from '../components/BarraDeFiltragem';
 import { XMarkIcon } from '@heroicons/react/24/outline';
@@ -12,47 +12,71 @@ export default function ListagemContatos() {
 
     const { listaImoveis } = useContext(ListaImoveisContext);
 
-    const [listagemFiltrada, updateListagemFiltrada] = useReducer(listagemReducer, listagemInicial(listaImoveis));
+    const [listagemFiltrada, setListagemFiltrada] = useState();
+    const [filtroAtual, setFiltroAtual] = useState('');
+    const [btnAtual, setBtnAtual] = useState('nao_realizado');
 
-    function listagemReducer(listagemFiltrada, action) {
-        switch (action.type) {
-            case 'filtrar':
-                return {
-                    btnAtual: action.btnAtual,
-                    listaFiltrada: getListFiltered(action.listaImoveis, action.btnAtual)
-                }
-            case 'remover_filtragem':
-                return listagemInicial()
+    useEffect(() => {
+        console.log("entrou")
 
-            case 'limpar':
-                return {};
-            
+        if (btnAtual === 'nao_realizado') {
+            handleFilter('');
+        } else {
+            handleFilter(btnAtual);
+        }
+    }, [btnAtual]);
+
+    useEffect(() => {
+        console.log("entrou filtragem lista")
+        setListagemFiltrada(listaImoveis?.filter(imovel => imovel.status === filtroAtual) || []);
+    }, [listaImoveis]);
+
+    function getListStatusFiltered(list, statusFilter) {
+        let novaLista = list.filter(obj => obj.status === statusFilter);
+        return novaLista
+    }
+
+    function handleFilter(statusFilter) {
+        setFiltroAtual(statusFilter);
+        if (statusFilter === 'todos') {
+            setListagemFiltrada(listaImoveis);
+        } else if (statusFilter === '') {
+            const novaListagem = getListStatusFiltered(listaImoveis, statusFilter);
+            setListagemFiltrada(novaListagem);
+        } else {
+            const novaListagem = getListStatusFiltered(listaImoveis, statusFilter);
+            setListagemFiltrada(novaListagem);
         }
     }
 
-    function handleChangeFiltro(btnClicado){
-        updateListagemFiltrada({
-            type: 'filtrar',
-            btnAtual: btnClicado,
-            listaImoveis: listaImoveis
-        })
+    const handleCancelFilter = () => {
+        setFiltroAtual('');
+        handleFilter('');
+        setBtnAtual('nao_realizado');
     }
+
+    const handleChangeBarraFiltragem = (btnClicado) => {
+        setListagemFiltrada([]);
+        setBtnAtual(btnClicado);
+    }
+
 
     return (
         <>
+        {console.log('renderizou')}
             <header className='bg-white shadow flex flex-col items-center pt-4 '>
                 <h2 className='text-3xl font-bold'>Listagem de imóveis</h2>
                 <div className='w-full p-4 pb-0 mt-2 flex flex-col items-center 2xl:max-w-5xl'>
                     <span className='w-full text-center font-medium'>Filtro: </span>
-                    <BarraDeFiltragem handleChangeFiltro={handleChangeFiltro} btnAtual={listagemFiltrada.btnAtual}/>
+                    <BarraDeFiltragem btnAtual={btnAtual} handleChangeBarraFiltragem={handleChangeBarraFiltragem}/>
                 </div>
             </header>
             <MainPages>
                 {
-                    listagemFiltrada.btnAtual !== 'nao_realizado' ?
-                        <h4 className='pl-4 md:pl-8 cursor-pointer' onClick={() => updateListagemFiltrada({type: 'remover_filtragem'})}>
+                    filtroAtual ?
+                        <h4 className='pl-4 md:pl-8 cursor-pointer' onClick={handleCancelFilter}>
                             <XMarkIcon className="h-3 w-3 stroke-2" />
-                            Filtragem: {listagemFiltrada.btnAtual + (listagemFiltrada.btnAtual === 'todos' ? '' : 's')}
+                            Filtragem: {filtroAtual + (filtroAtual === 'todos' ? '' : 's')}
                         </h4>
                         :
                         <p>Os imóveis listados abaixo ainda não foram contactados:</p>
@@ -60,10 +84,10 @@ export default function ListagemContatos() {
 
                 <ListBody>
                     {
-                        seListaEstaVazia(listagemFiltrada.listaFiltrada) ?
+                        seListaEstaVazia(listagemFiltrada) ?
                             mostreAvisoDeListaVazia()
                             :
-                            listagemFiltrada.listaFiltrada?.map((imovel, index) => (
+                            listagemFiltrada?.map((imovel, index) => (
                                 <ListItem key={index}>
                                     <ImovelProvider imovel={imovel}>
                                         {
@@ -77,22 +101,6 @@ export default function ListagemContatos() {
             </MainPages>
         </>
     );
-}
-
-function listagemInicial(listaImoveis) {
-    return {
-        btnAtual: 'nao_realizado',
-        listaFiltrada: getListFiltered(listaImoveis, 'nao_realizado'),
-    }
-}
-
-function getListFiltered(list, filter) {
-    if (filter === 'todos') {
-        return list;
-    }
-
-    const filterTransform = filter === 'nao_realizado' ? '' : filter;
-    return list?.filter(obj => obj.status === filterTransform);
 }
 
 function seListaEstaVazia(lista) {

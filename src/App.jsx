@@ -14,8 +14,8 @@ function App() {
   const { user } = useContext(UserContext);
 
   return (
-    <Router basename='/sistema-angariacao-imoveis'>
-    {/* <Router> */}
+    // <Router basename='/sistema-angariacao-imoveis'>
+    <Router>
       <Routes>
         {
           !user.id
