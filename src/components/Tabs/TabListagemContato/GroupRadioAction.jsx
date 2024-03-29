@@ -54,7 +54,7 @@ export default function GroupRadioAction() {
     };
 
     return (
-        <Card className="min-w-fit flex flex-row flex-wrap items-center justify-around grow">
+        <Card key={imovelAtual.id} className="min-w-fit flex flex-row flex-wrap items-center justify-around grow">
             <List className="w-full flex-row flex-wrap justify-center">
                 <ListItem className="max-w-fit p-0">
                     <label

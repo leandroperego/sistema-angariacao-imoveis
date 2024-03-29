@@ -16,7 +16,7 @@ export default function CardListagem() {
 
     return (
         <>
-            <Card className="mt-6 w-full max-w-[600px] sm:max-w-full 2xl:max-w-[1000px]">
+            <Card key={imovel.id} className="mt-6 w-full max-w-[600px] sm:max-w-full 2xl:max-w-[1000px]">
                 <CardHeader floated={false} className="flex flex-col items-center h-auto max-h-[400px] shadow-none sm:flex-row sm:justify-around md:hidden">
                     <Typography variant="h3" color={imovel.comercializacao === "Venda" ? "red" : "green"} className="w-fit bg-transparent mb-4 text-center">
                         {imovel.comercializacao.toUpperCase()}

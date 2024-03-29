@@ -10,7 +10,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function ListagemContatos() {
 
-    const { listaImoveis } = useContext(ListaImoveisContext);
+    // const { listaImoveis } = useContext(ListaImoveisContext);
+    const listaImoveis = JSON.parse(localStorage.getItem("listaImoveis"));
 
     const [listagemFiltrada, updateListagemFiltrada] = useReducer(listagemReducer, listagemInicial(listaImoveis));
 
@@ -79,7 +80,7 @@ export default function ListagemContatos() {
     );
 }
 
-function listagemInicial(lista) {
+function listagemInicial(lista, updateLista, setUpdateLista) {
     return {
         type: 'filtrar',
         btnAtual: 'nao_realizado',

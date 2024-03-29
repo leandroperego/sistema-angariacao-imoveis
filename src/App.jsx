@@ -8,7 +8,6 @@ import Login from './pages/Login';
 import CriarConta from './pages/CriarConta';
 import { UserContext } from './context/user-context';
 import React, { useContext } from 'react';
-
 function App() {
 
   const { user } = useContext(UserContext);
