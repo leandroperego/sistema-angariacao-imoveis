@@ -9,7 +9,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import CardMenu from "./CardMenu";
- 
+
 export default function MenuNavegacaoMobile() {
 
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);

@@ -22,7 +22,7 @@ export default function ListagemContatos() {
                     listaFiltrada: getListFiltered(action.listaImoveis, action.btnAtual)
                 }
             case 'remover_filtragem':
-                return listagemInicial()
+                return listagemInicial(listaImoveis);
 
             case 'limpar':
                 return {};
@@ -79,10 +79,12 @@ export default function ListagemContatos() {
     );
 }
 
-function listagemInicial(listaImoveis) {
+function listagemInicial(lista) {
     return {
+        type: 'filtrar',
         btnAtual: 'nao_realizado',
-        listaFiltrada: getListFiltered(listaImoveis, 'nao_realizado'),
+        listaImoveis: lista,
+        listaFiltrada: getListFiltered(lista, 'nao_realizado'),
     }
 }
 

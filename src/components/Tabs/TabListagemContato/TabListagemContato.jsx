@@ -8,19 +8,12 @@ import {
 import TabBodyIdentificacao from "../TabListagemContato/TabBodyIdentificacao";
 import TabBodyContato from "./TabBodyContato";
 import TabBodyAnotacoes from "./TabBodyAnotacoes";
-import { useContext, useEffect, useState} from "react";
+import { useContext } from "react";
 import { ImovelContext } from "../../../context/imovel-context";
 
 export default function TabListagemContato() {
 
   const imovel = useContext(ImovelContext);
-
-  // const [imovelId, setImovelId] = useState(imovel.id);
-
-  useEffect(() => {
-    console.log('useEffect')
-    console.log(imovel.id)
-  }, [imovel.id]);
 
   const tabs = [
     {
@@ -41,8 +34,7 @@ export default function TabListagemContato() {
   ];
 
   return (
-    <Tabs value={`id-${imovel.id}`}>
-      {console.log(imovel.id)}
+    <Tabs key={imovel.id} value={`id-${imovel.id}`}>
       <TabsHeader
         className="bg-gray-300 p-3 pb-0 rounded-b-none flex-col"
         indicatorProps={{
