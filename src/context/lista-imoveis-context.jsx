@@ -11,7 +11,6 @@ export const ListaProvider = ({ children }) => {
     useEffect(() => {
         async function fetchData() {
             const imoveis = await getImoveis();
-            localStorage.setItem("listaImoveis", JSON.stringify(imoveis));
             setListaImoveis(imoveis);
         }
         fetchData();

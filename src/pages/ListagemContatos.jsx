@@ -3,17 +3,28 @@ import ListItem from '../components/List/ListItem';
 import MainPages from '../components/MainPages';
 import CardListagem from '../components/Cards/CardListagem';
 import { ImovelProvider } from '../context/imovel-context';
-import { useContext, useReducer } from 'react';
-import { ListaImoveisContext } from '../context/lista-imoveis-context';
+import { useContext, useEffect, useReducer } from 'react';
 import BarraDeFiltragem from '../components/BarraDeFiltragem';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
+import { ListaImoveisContext } from '../context/lista-imoveis-context';
+
 export default function ListagemContatos() {
 
-    // const { listaImoveis } = useContext(ListaImoveisContext);
-    const listaImoveis = JSON.parse(localStorage.getItem("listaImoveis"));
+    const { listaImoveis } = useContext(ListaImoveisContext);
 
-    const [listagemFiltrada, updateListagemFiltrada] = useReducer(listagemReducer, listagemInicial(listaImoveis));
+    const [listagemFiltrada, updateListagemFiltrada] = useReducer(listagemReducer, {
+        btnAtual: 'nao_realizado', 
+        listaFiltrada: getListFiltered(listaImoveis, 'nao_realizado')
+    });
+
+    useEffect(() => {
+        updateListagemFiltrada({
+            ...listagemFiltrada,
+            type: 'filtrar',
+            listaImoveis: listaImoveis
+        })
+    }, [listaImoveis]);
 
     function listagemReducer(listagemFiltrada, action) {
         switch (action.type) {
@@ -80,7 +91,7 @@ export default function ListagemContatos() {
     );
 }
 
-function listagemInicial(lista, updateLista, setUpdateLista) {
+function listagemInicial(lista) {
     return {
         type: 'filtrar',
         btnAtual: 'nao_realizado',
