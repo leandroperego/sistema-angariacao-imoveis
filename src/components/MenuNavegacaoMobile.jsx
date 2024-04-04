@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   IconButton,
   Drawer,
@@ -12,7 +12,7 @@ import CardMenu from "./CardMenu";
 
 export default function MenuNavegacaoMobile() {
 
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
  
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);

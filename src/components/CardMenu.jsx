@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -29,10 +29,12 @@ import { ListaImoveisContext } from "../context/lista-imoveis-context";
 export default function CardMenu({ closeCard }) {
 
     const {listaImoveis} = useContext(ListaImoveisContext);
-    let tamanhoLista = listaImoveis?.filter(imovel => imovel.status === '').length || 0;
-
-    const navigate = useNavigate();
     const {user, setUser } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    const tamanhoLista = useMemo(() => {
+        return listaImoveis?.filter(imovel => imovel.status === '').length || 0;
+    }, [listaImoveis]);
 
     const handleLogout = () => {
         efetuarLogout();
