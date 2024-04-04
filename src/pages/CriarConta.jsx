@@ -12,7 +12,7 @@ import { UserContext } from "../context/user-context";
 
 export default function CriarConta() {
 
-    const { user, setUser } = useContext(UserContext);
+    const { user, updateUser } = useContext(UserContext);
 
     const { Formik } = formik;
     const navigate = useNavigate();
@@ -24,10 +24,9 @@ export default function CriarConta() {
     });
 
     const setUserForLogin = (values) => {
-        setUser({
-            ...user,
-            nome: values.nome,
-            email: values.email
+        updateUser(usuario => {
+            usuario.nome = values.nome;
+            usuario.email = values.email
         });
         navigate("/login");
     }

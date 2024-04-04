@@ -10,7 +10,7 @@ export default function BarraDeFiltragem({handleChangeFiltro, btnAtual}) {
         <section className="w-full flex items-center justify-center">
             <ButtonGroup variant="text" className="w-full flex sm:justify-center" >
                 <Button
-                    className={`${btnAtual === 'todos' ? 'bg-gray-100' : 'bg-transparent'} p-0 py-4 grow sm:grow-0 sm:p-4 sm:px-6`}
+                    className={`${getClassBgColor(btnAtual, 'todos')} ${getClassStandard()}`}
                     value={'todos'}
                     onClick={handleClick}
                 >
@@ -18,7 +18,7 @@ export default function BarraDeFiltragem({handleChangeFiltro, btnAtual}) {
                 </Button>
 
                 <Button
-                    className={`text-blue-600 ${btnAtual === 'nao_realizado' ? 'bg-gray-100' : 'bg-transparent'} p-0 py-4 grow sm:grow-0 sm:p-4`}
+                    className={`text-blue-600 ${getClassBgColor(btnAtual, 'nao_realizado')} ${getClassStandard()}`}
                     value={'nao_realizado'}
                     onClick={handleClick}
                 >
@@ -26,7 +26,7 @@ export default function BarraDeFiltragem({handleChangeFiltro, btnAtual}) {
                 </Button>
 
                 <Button
-                    className={`text-green-600 ${btnAtual === 'aprovado' ? 'bg-gray-100' : 'bg-transparent'} p-0 py-4 grow sm:grow-0 sm:p-4`}
+                    className={`text-green-600 ${getClassBgColor(btnAtual, 'aprovado')} ${getClassStandard()}`}
                     value={'aprovado'}
                     onClick={handleClick}
                 >
@@ -34,7 +34,7 @@ export default function BarraDeFiltragem({handleChangeFiltro, btnAtual}) {
                 </Button>
 
                 <Button
-                    className={`text-red-600 ${btnAtual === 'rejeitado' ? 'bg-gray-100' : 'bg-transparent'} p-0 py-4 grow sm:grow-0 sm:p-4`}
+                    className={`text-red-600 ${getClassBgColor(btnAtual, 'rejeitado')} ${getClassStandard()}`}
                     value={'rejeitado'}
                     onClick={handleClick}
                 >
@@ -43,4 +43,12 @@ export default function BarraDeFiltragem({handleChangeFiltro, btnAtual}) {
             </ButtonGroup>
         </section>
     );
+}
+
+function getClassBgColor(btnAtual, value) {
+    return btnAtual === value ? 'bg-gray-100' : 'bg-transparent';
+}
+
+function getClassStandard() {
+    return 'p-0 py-4 grow sm:grow-0 sm:p-4';
 }
