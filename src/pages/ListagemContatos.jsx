@@ -3,7 +3,7 @@ import ListItem from '../components/List/ListItem';
 import MainPages from '../components/MainPages';
 import CardListagem from '../components/Cards/CardListagem';
 import { ImovelProvider } from '../context/imovel-context';
-import { useContext, useEffect, useReducer } from 'react';
+import { useContext, useEffect, useMemo, useReducer } from 'react';
 import BarraDeFiltragem from '../components/BarraDeFiltragem';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 

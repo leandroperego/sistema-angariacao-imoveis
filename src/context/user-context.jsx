@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { getUser } from '../infra/db/users';
 import { efetuarLogin } from '../infra/auth/user';
+import { useImmer } from 'use-immer';
 
 export const usuarioInicial = {
     id: '',
@@ -12,16 +13,16 @@ export const UserContext = createContext({});
 
 export function UserProvider({ children }) {
 
-    const [user, setUser] = useState(usuarioInicial);
+    const [user, updateUser] = useImmer(usuarioInicial);
 
     useEffect(() => {
 
         async function fetchUser(userId){
             const userDb = await getUser(userId);
-            setUser({
-                id: userDb.id,
-                nome: userDb.nome,
-                email: userDb.email
+            updateUser((draft) => {
+                draft.id = userDb.id;
+                draft.nome = userDb.nome;
+                draft.email = userDb.email;
             });
         }
 
@@ -38,7 +39,7 @@ export function UserProvider({ children }) {
     }, []);
 
     return (
-        <UserContext.Provider value={{user, setUser}}>
+        <UserContext.Provider value={{user, updateUser}}>
             {children}
         </UserContext.Provider>
     );

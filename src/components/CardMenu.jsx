@@ -29,7 +29,7 @@ import { ListaImoveisContext } from "../context/lista-imoveis-context";
 export default function CardMenu({ closeCard }) {
 
     const {listaImoveis} = useContext(ListaImoveisContext);
-    const {user, setUser } = useContext(UserContext);
+    const {user, updateUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const tamanhoLista = useMemo(() => {
@@ -38,7 +38,7 @@ export default function CardMenu({ closeCard }) {
 
     const handleLogout = () => {
         efetuarLogout();
-        setUser(usuarioInicial);
+        updateUser(usuarioInicial);
         navigate("/");
     }
 

@@ -44,4 +44,5 @@ export const efetuarLogin = async (email, password) => {
 
 export const efetuarLogout = () => {
     auth.signOut();
+    sessionStorage.removeItem("user");
 }

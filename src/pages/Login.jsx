@@ -11,7 +11,7 @@ import { UserContext } from "../context/user-context";
 
 export default function Login() {
 
-  const { user, setUser } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
 
   const { Formik } = formik;
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function Login() {
     if (!usuarioLogado) {
       alert("Email ou senha inválidos");
     } else {
-      setUser({ ...user, id: usuarioLogado.uid });
+      updateUser(usuario => {usuario.id = usuarioLogado.uid});
       navigate("/home");
     }
     resetForm();
