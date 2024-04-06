@@ -7,7 +7,7 @@ export default function HeaderAccordion({ imovel, open }) {
                 {imovel.comercializacao.toUpperCase()}
             </section>
             <div className="w-full flex justify-between items-center mt-2 md:w-auto md:mt-0 md:basis-2/3">
-                <section className="h-auto flex justify-center items-center">
+                <section className="h-auto flex justify-center items-center text-gray-700">
                     {imovel.tipo}
                 </section>
                 <section className="flex flex-col text-sm text-nowrap">

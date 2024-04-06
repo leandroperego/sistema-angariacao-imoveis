@@ -46,3 +46,7 @@ export const efetuarLogout = () => {
     auth.signOut();
     sessionStorage.removeItem("user");
 }
+
+export const getUsuarioLogado = () => {
+    return JSON.parse(sessionStorage.getItem("user"));
+}

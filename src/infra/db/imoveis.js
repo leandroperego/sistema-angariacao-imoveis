@@ -1,13 +1,16 @@
 import { collection, addDoc, getDocs, getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase.config';
+import { getUsuarioLogado } from "../auth/user";
 
 const fornecedorCollection = collection(db, 'imoveis');
 
 export const addImovel = async (imovel) => {
+    const user = getUsuarioLogado();
+    const imovelData = {...imovel, userRef: user.id}
 
     let imovelId = null;
 
-    await addDoc(fornecedorCollection, imovel)
+    await addDoc(fornecedorCollection, imovelData)
         .then((docRef) => {
             imovelId = docRef.id;
         })
@@ -19,10 +22,14 @@ export const addImovel = async (imovel) => {
 }
 
 export const getImoveis = async () => {
+    const user = getUsuarioLogado();
+
     const imoveis = [];
     const querySnapshot = await getDocs(fornecedorCollection);
     querySnapshot.forEach((doc) => {
-        imoveis.push({...doc.data(), id: doc.id});
+        if (doc.data().userRef === user.id){
+            imoveis.push({ ...doc.data(), id: doc.id });
+        }
     });
     return imoveis;
 }
