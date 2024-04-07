@@ -1,16 +1,17 @@
 import { Typography, Input, Button } from "@material-tailwind/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useContext } from "react";
 import { ImovelContext } from "../../../context/imovel-context";
 import { updateImovel } from "../../../infra/db/imoveis";
+import { ListaImoveisContext } from "../../../context/lista-imoveis-context";
 
 export default function TabBodyContato() {
 
     const imovel = useContext(ImovelContext);
+    const {updateLista, setUpdateLista} = useContext(ListaImoveisContext);
 
     const [isModified, setIsModified] = useState(false);
     const [contatoNome, setContatoNome] = useState(imovel.nome);
-
 
     const handleChange = (e) => {
         setIsModified(true);
@@ -26,6 +27,7 @@ export default function TabBodyContato() {
                 alert("Houve um erro: " + error.message);
             })
         setIsModified(!isModified);
+        setUpdateLista(!updateLista);
     }
 
     const handleCancelar = () => {

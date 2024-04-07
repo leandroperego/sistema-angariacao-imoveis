@@ -28,10 +28,10 @@ export default function CardListagem() {
                     />
                 </CardHeader>
                     <CardBody>
-                        <TabListagemContato />
+                        <TabListagemContato key={imovel.id} />
                     </CardBody>
                     <CardFooter className="pt-0 flex justify-center overflow-auto">
-                        <GroupRadioAction />
+                        <GroupRadioAction key={imovel.id}/>
                     </CardFooter>
             </Card>
 
