@@ -16,13 +16,14 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 - Material Tailwind: Uma combinação entre Material UI e Tailwind CSS.
 - Firebase Authentication: Para autenticação de usuários.
 - Firestore Database: Um banco de dados NoSQL em tempo real.
+
 O sistema foi projetado para diferentes tamanhos de telas. Possibilidade de acesso por mobiles, tablets e desktops.
 
 # Funcionalidades
-Cadastro de Possiveis Angariações: Permite cadastrar informações detalhadas sobre imóveis encontrados.
-Gerenciamento de Clientes: Possibilita o cadastro e organização de clientes associados a cada angariação.
-Lista de Contatos: Facilita a visualização de uma lista de imóveis e clientes para contato.
-Autenticação de Usuários: Garante a segurança e o acesso personalizado por meio de autenticação.
+- Cadastro de Possiveis Angariações: Permite cadastrar informações detalhadas sobre imóveis encontrados.
+- Gerenciamento de Clientes: Possibilita o cadastro e organização de clientes associados a cada angariação.
+- Lista de Contatos: Facilita a visualização de uma lista de imóveis e clientes para contato.
+- Autenticação de Usuários: Garante a segurança e o acesso personalizado por meio de autenticação.
 
 # Como conhecer o projeto publicado
 O projeto está publicado pelo pages do próprio GitHub, no qual pode ser acessado pelo link:
